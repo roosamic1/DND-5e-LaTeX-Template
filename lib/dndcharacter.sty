@@ -1,0 +1,244 @@
+% Provides tools for developing D&D 5e characters.
+
+\usepackage{fp}
+
+% Use the same style of box as monsterboxnobg to start the character sheet
+\newtcolorbox{charactersheet}[2][]{
+    enhanced,
+    frame hidden,
+    before skip=7pt plus2pt,
+    boxrule=0pt,
+    breakable,
+    boxsep=0.25ex,
+    toptitle=3mm,
+    left=2.5mm,
+    right=2.15mm,
+    arc=0mm,
+    opacityback=0,
+    colframe=titlered,
+    fonttitle=\scshape\bfseries\color{titlered}\Large,
+    fontupper=\fontfamily{lmss}\selectfont,
+    title=#2,
+    after={\vspace{7pt plus 1pt}\noindent},
+    #1
+}
+
+\newcommand{\charactersection}[1]{
+    {\par
+    \color{titlered}\normalfont\scshape\Large #1 \vspace{3pt}
+    \titleline{\color{titlered}\titlerule[0.6pt]}
+    \par\medskip}
+    }
+
+\newcommand*\savingthrowcircle{
+    \tikz\draw (0,0) circle (1ex);
+}
+
+\newcommand*\filledsavingthrowcircle{
+    \tikz\draw[black, fill=black] (0,0) circle (1ex);
+}
+
+% Represents the top-right section of the official character sheet.
+% returns a table 
+\newkeycommand\characterheading[
+    name=,
+    classandlevel=,
+    background=,
+    playername=,
+    race=,
+    alignment=,
+    experiencepoints=,
+    proficiencybonus=
+]{%
+   \begin{tabular}{lp{0.5\textwidth}}
+        \ifcommandkey{name}
+            {\textbf{Name} & \commandkey{name} \\}{}
+        \textbf{Class \& Level} & \commandkey{classandlevel} \\
+        \textbf{Race} & \commandkey{race} \\
+        \textbf{Background} & \commandkey{background} \\
+        \textbf{Alignment} & \commandkey{alignment} \\
+        \textbf{Player Name} & \commandkey{playername} \\
+        \textbf{Experience Points} & \commandkey{experiencepoints} \\
+        \textbf{Proficiency Bonus} & \commandkey{proficiencybonus} \\
+        \textbf{Inspiration} & \savingthrowcircle
+    \end{tabular}
+
+    \medskip
+}
+
+\newkeycommand\charactercombatstats[armorclass=,
+                                   initiative=,
+                                   speed=,
+                                   maxhitpoints=,
+                                   hitpoints=,
+                                   hitdice=]{%
+    \charactersection{Combat}
+    \begin{center}
+        \begin{tabular}{ccc}
+            \commandkey{armorclass} & 
+            \commandkey{initiative} & 
+            \commandkey{speed} 
+            \\
+            \textbf{Armor Class} & \textbf{Initiative} & \textbf{Speed}
+        \end{tabular} 
+    \end{center}
+
+    \begin{tabular}{lr}
+        \textbf{Current Hit Points} & \commandkey{hitpoints} \\
+        \textbf{Hit Point Maximum}  & \commandkey{maxhitpoints} \\
+    \end{tabular}
+    \\
+
+
+    \begin{tabular}{lr}
+
+        \begin{tabular}{lr}
+            \textbf{Hit Dice} & \commandkey{hitdice}
+        \end{tabular} &
+    
+        \begin{tabular}{c}
+            \textbf{Death Saves} \\
+            \begin{tabular}{lrrr}
+                \textbf{Successes} & \savingthrowcircle & \savingthrowcircle & \savingthrowcircle \\
+                \textbf{Failures} & \savingthrowcircle & \savingthrowcircle & \savingthrowcircle 
+            \end{tabular}
+        \end{tabular}
+
+    \end{tabular}
+}
+
+\newkeycommand\charactersavingthrows[
+    strength=,
+    proficientInStrength=,
+    dexterity=,
+    proficientInDexterity=,
+    constitution=,
+    proficientInConstitution=,
+    intelligence=,
+    proficientInIntelligence=,
+    wisdom=,
+    proficientInWisdom=,
+    charisma=,
+    proficientInCharisma=
+]{%
+    \charactersection{Saving Throws}
+
+    \newcommand{\makecharactersavingthrowline}[3]{
+        \ifcommandkey{##3}{
+            \filledsavingthrowcircle
+        }{
+            \savingthrowcircle
+        } & 
+        \commandkey{##2} & 
+        \textbf{##1} \\
+    }
+
+    \begin{tabular}{lcr}
+        \makecharactersavingthrowline{Strength}{strength}{proficientInStrength}
+        \makecharactersavingthrowline{Dexterity}{dexterity}{proficientInDexterity}
+        \makecharactersavingthrowline{Constitution}{constitution}{proficientInConstitution}
+        \makecharactersavingthrowline{Intelligence}{intelligence}{proficientInIntelligence}
+        \makecharactersavingthrowline{Wisdom}{wisdom}{proficientInWisdom}
+        \makecharactersavingthrowline{Charisma}{charisma}{proficientInCharisma}
+    \end{tabular} \\
+}
+
+
+\newkeycommand\characterskills[
+    acrobatics=,
+    proficientInAcrobatics=,
+    animalhandling=,
+    proficientInAnimalHandling=,
+    arcana=,
+    proficientInArcana=,
+    athletics=,
+    proficientInAthletics=,
+    deception=,
+    proficientInDeception=,
+    history=,
+    proficientInHistory,
+    insight=,
+    proficientInInsight=,
+    intimidation=,
+    proficientInIntimidation=,
+    investigation=,
+    proficientInInvestigation=,
+    medicine=,
+    proficientInMedicine=,
+    nature=,
+    proficientInNature=,
+    perception=,
+    proficientInPerception=,
+    performance=,
+    proficientInPerformance=,
+    persuasion=,
+    proficientInPersuasion=,
+    religion=,
+    proficientInReligion=,
+    sleightofhand=,
+    proficientInSleightOfHand=,
+    stealth=,
+    proficientInStealth=,
+    survival=,
+    proficientInSurvival=,
+]{%
+    \charactersection{Skills}
+
+    \newcommand{\makecharacterskillline}[4]{
+        \ifcommandkey{##4}{
+            \filledsavingthrowcircle
+        }{
+            \savingthrowcircle
+        } & 
+        \commandkey{##3} & 
+        \textbf{##1} {\tiny (##2)} \\
+    }
+
+    \begin{tabular}{lcl}
+        \makecharacterskillline{Acrobatics}{DEX}{acrobatics}{proficientInAcrobatics}
+        \makecharacterskillline{Animal Handling}{WIS}{animalhandling}{proficientInAnimalHandling}
+        \makecharacterskillline{Arcana}{INT}{arcana}{proficientInArcana}
+        \makecharacterskillline{Athletics}{STR}{athletics}{proficientInAthletics}
+        \makecharacterskillline{Deception}{CHA}{deception}{proficientInDeception}
+        \makecharacterskillline{History}{INT}{history}{proficientInHistory}
+        \makecharacterskillline{Insight}{WIS}{insight}{proficientInInsight}
+        \makecharacterskillline{Intimidation}{CHA}{intimidation}{proficientInIntimidation}
+        \makecharacterskillline{Investigation}{INT}{investigation}{proficientInInvestigation}
+        \makecharacterskillline{Medicine}{WIS}{medicine}{proficientInMedicine}
+        \makecharacterskillline{Nature}{INT}{nature}{proficientInNature}
+        \makecharacterskillline{Perception}{WIS}{perception}{proficientInPerception}
+        \makecharacterskillline{Performance}{CHA}{performance}{proficientInPerformance}
+        \makecharacterskillline{Persuasion}{CHA}{persuasion}{proficientInPersuasion}
+        \makecharacterskillline{Religion}{INT}{religion}{proficientInReligion}
+        \makecharacterskillline{Sleight of Hand}{DEX}{sleightofhand}{proficientInSleightOfHand}
+        \makecharacterskillline{Stealth}{DEX}{stealth}{proficientInStealth}
+        \makecharacterskillline{Survival}{WIS}{survival}{proficientInSurvival}
+    \end{tabular} \\
+}
+
+\newkeycommand\charactercoins[
+    copper=0,
+    silver=0,
+    electrum=0,
+    gold=0,
+    platinum=0
+]{%
+
+    \hline 
+
+    \begin{tabular}{ccccc}
+        \commandkey{copper} & 
+        \commandkey{silver} & 
+        \commandkey{electrum} & 
+        \commandkey{gold} & 
+        \commandkey{platinum} \\
+
+        \textbf{Copper} &
+        \textbf{Silver} &
+        \textbf{Electrum} &
+        \textbf{Gold} &
+        \textbf{Platinum} \\
+    \end{tabular}
+
+    \hline
+}
