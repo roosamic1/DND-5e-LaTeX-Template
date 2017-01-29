@@ -29,6 +29,9 @@
     \titleline{\color{titlered}\titlerule[0.6pt]}
     \par\medskip}
     }
+%\titlespacing*{\subsubsection}{0pt}{*0.5}{5pt}
+%\titleformat{\subsubsection}
+%{\color{titlered}\normalfont\scshape\Large}{\thesubsection}{1em}{}[{\color{titlered}\titlerule[0.5pt]\color{black}}]
 
 \newcommand*\savingthrowcircle{
     \tikz\draw (0,0) circle (1ex);
@@ -48,7 +51,8 @@
     race=,
     alignment=,
     experiencepoints=,
-    proficiencybonus=
+    proficiencybonus=,
+    inspiration=,
 ]{%
    \begin{tabular}{lp{0.5\textwidth}}
         \ifcommandkey{name}
@@ -60,7 +64,9 @@
         \textbf{Player Name} & \commandkey{playername} \\
         \textbf{Experience Points} & \commandkey{experiencepoints} \\
         \textbf{Proficiency Bonus} & \commandkey{proficiencybonus} \\
-        \textbf{Inspiration} & \savingthrowcircle
+        \textbf{Inspiration} & 
+            \ifcommandkey{inspiration}
+                {\filledsavingthrowcircle}{\savingthrowcircle} \\
     \end{tabular}
 
     \medskip
