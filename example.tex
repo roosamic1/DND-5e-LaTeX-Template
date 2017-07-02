@@ -1,6 +1,10 @@
-\documentclass[10pt,twoside,twocolumn]{article}
+% Changing book to article will make the footers match on each page,
+% rather than alternate every other.
+%
+% Note that the article class does not have chapters.
+\documentclass[10pt,twoside,twocolumn,openany]{book}
 \usepackage[bg-letter]{dnd} % Options: bg-a4, bg-letter, bg-full, bg-print, bg-none.
-\usepackage[ngerman]{babel} % Trennungsregeln und autom. Überschriften in n. dt. RS
+\usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 
 % Start document
@@ -9,15 +13,22 @@
 
 % Your content goes here
 
+% Comment this out if you're using the article class.
+\chapter{Chapter 1: The Dark \LaTeX}
+
 \section{Main Section}
 \lipsum[1] % filler text
 
 \subsection{Fun with boxes}
 \subsubsection{Even more fun!}
 
+
 \begin{commentbox}{Neat Green Box!}
 	\lipsum[1]
 \end{commentbox}
+
+\subtitlesection{Weapon, +1, +2, or +3}
+{Weapon (any), uncommon (+1), rare (+2), or very rare (+3)}
 
 \begin{quotebox}
 	As you approach this template you get a sense that the blood and tears of many generations went into its making. A warm feeling welcomes you as you type your first words.
