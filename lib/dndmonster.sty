@@ -84,14 +84,14 @@
 	\textbf{Speed} \commandkey{speed}\\
 }
 
-% Taubular enviornment for stats-block
+%Taubular enviornment for stats-block
 \newkeycommand\stats[STR=\stat{10},
                         DEX=\stat{10},
                         CON=\stat{10},
                         INT=\stat{10},
                         WIS=\stat{10},
                         CHA=\stat{10}]{
-    {\footnotesize
+    {\footnotesize%
 	\hspace*{-3.5pt}
 	\resizebox{0.97\linewidth}{\height}{
 		\begin{tabular}{cccccc}
@@ -101,7 +101,7 @@
 		\end{tabular}
 	}
 	\\[0.4em] %adds space after table
-    }
+   }
 }
 
 \newkeycommand\details[skills=,

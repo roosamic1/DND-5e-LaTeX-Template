@@ -1,0 +1,75 @@
+% Provides tools for developing D&D 5e characters.
+\usepackage{fp}
+
+
+
+%Big change here is we define "commands" for each stat
+%This should let us think of them as vars for other sections 
+%hopefully reducing reduncdncy
+\renewcommand\stats[STR=\stat{10},
+					DEX=\stat{10},
+					CON=\stat{10},
+					INT=\stat{10},
+					WIS=\stat{10},
+					CHA=\stat{10}]{
+	%Make vars for stats and a command to set them
+	\newcommand{\vSTR}{\commandkey{STR}}
+	\newcommand{\vDEX}{\commandkey{DEX}}
+	\newcommand{\vCON}{\commandkey{CON}}
+	\newcommand{\vINT}{\commandkey{INT}}
+	\newcommand{\vWIS}{\commandkey{WIS}}
+	\newcommand{\vCHA}{\commandkey{CHA}}
+
+	
+	{\footnotesize
+		\hspace*{-3.5pt}
+		\resizebox{0.97\linewidth}{\height}{
+			\begin{tabular}{cccccc}
+				\rule{0pt}{3.7mm} %adds space between hline and table
+				\textbf{STR} & \textbf{DEX} & \textbf{CON} & \textbf{INT} & \textbf{WIS} & \textbf{CHA}\\
+				\stat{\vSTR} & \stat{\vDEX} & \stat{\vCON} & \stat{\vINT} & \stat{\vWIS} & \stat{\vCHA}
+			\end{tabular}
+		}
+		\\[0.4em] %adds space after table
+	}
+}
+
+%%Next project:
+%%Make vars from above fill tabel
+%make table alternate colors by section? 
+%combine Saving throws and skills?
+\renewcommand\charactersavingthrows[
+strength=,
+proficientInStrength=,
+dexterity=,
+proficientInDexterity=,
+constitution=,
+proficientInConstitution=,
+intelligence=,
+proficientInIntelligence=,
+wisdom=,
+proficientInWisdom=,
+charisma=,
+proficientInCharisma=
+]{%
+	\charactersection{Saving Throws}
+	
+	\newcommand{\makecharactersavingthrowline}[3]{
+		\ifcommandkey{##3}{
+			\filledsavingthrowcircle
+		}{
+			\savingthrowcircle
+		} & 
+		\commandkey{##2} & 
+		\textbf{##1} \\
+	}
+	
+	\begin{tabular}{lcr}
+		\makecharactersavingthrowline{Strength}{strength}{proficientInStrength}
+		\makecharactersavingthrowline{Dexterity}{dexterity}{proficientInDexterity}
+		\makecharactersavingthrowline{Constitution}{constitution}{proficientInConstitution}
+		\makecharactersavingthrowline{Intelligence}{intelligence}{proficientInIntelligence}
+		\makecharactersavingthrowline{Wisdom}{wisdom}{proficientInWisdom}
+		\makecharactersavingthrowline{Charisma}{charisma}{proficientInCharisma}
+	\end{tabular} \\
+}
