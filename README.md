@@ -38,8 +38,8 @@ Per default "bg-letter" and "bg-full" are loaded.
 
 ### Goal 1: Make charactersheet generation simpler
 ### To Do:
- -find a way to let stats / proficiency be callable variables (current method: \newcommand)
- -make skills/ saving trow tables automatic affter some initialization (ie only proficiency bool as input)
+- find a way to let stats / proficiency be callable variables (current method: \newcommand)
+- make skills/ saving trow tables automatic affter some initialization (ie only proficiency bool as input)
 
 
 ### Image Credit
